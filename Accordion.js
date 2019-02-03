@@ -83,7 +83,10 @@ export default class Accordion extends Component {
       renderContent,
       renderHeader,
       renderSectionTitle,
+      hasCustomHandler,
     } = this.props;
+
+    const collapseHandler = this._toggleSection;
 
     const renderCollapsible = (section, key) => (
       <Collapsible
@@ -103,18 +106,32 @@ export default class Accordion extends Component {
 
             {expandFromBottom && renderCollapsible(section, key)}
 
-            <Touchable
-              onPress={() => this._toggleSection(key)}
-              underlayColor={underlayColor}
-              {...touchableProps}
-            >
-              {renderHeader(
-                section,
-                key,
-                activeSections.includes(key),
-                sections
-              )}
-            </Touchable>
+            {
+              hasCustomHandler ? (
+                renderHeader(
+                  section,
+                  key,
+                  activeSections.includes(key),
+                  sections,
+                  collapseHandler,
+                )
+              ) : (
+                  <Touchable
+                    onPress={() => this._toggleSection(key)}
+                    underlayColor={underlayColor}
+                    {...touchableProps}
+                  >
+                    {renderHeader(
+                      section,
+                      key,
+                      activeSections.includes(key),
+                      sections,
+                    )}
+                  </Touchable>
+                )
+            }
+
+            
 
             {!expandFromBottom && renderCollapsible(section, key)}
           </View>

@@ -15,7 +15,8 @@ export interface AccordionProps<T> {
     content: T,
     index: number,
     isActive: boolean,
-    sections: T[]
+    sections: T[],
+    callback?: (key: string) => void
   ): React.ReactElement<{}>;
 
   /**

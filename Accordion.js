@@ -40,7 +40,7 @@ export default class Accordion extends Component {
     sectionContainerStyle: {},
   };
 
-  _toggleSection(section) {
+  _toggleSection = (section) => {
     if (!this.props.disabled) {
       const { activeSections, expandMultiple, onChange } = this.props;
 
